@@ -1,6 +1,10 @@
 package com.sundera.timewise.event.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +27,17 @@ public class EventController {
 		Gson gson = GsonFactory.createGson();
 		EventDto eventDto = gson.fromJson(eventJson,EventDto.class);
 		eventService.addEvent(eventDto);
+	}
+	
+	@GetMapping("/{eventId}")
+	public EventDto getProduct(@PathVariable String eventId) throws Exception {
+		System.out.println(eventId);
+		try {
+			return eventService.getEvent(UUID.fromString(eventId));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new Exception("Invalid String Id");
+		}
 	}
 	
 	
