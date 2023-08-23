@@ -1,0 +1,60 @@
+package com.sundera.timewise.event.dto;
+
+import java.util.UUID;
+
+import com.google.gson.annotations.SerializedName;
+
+public abstract class EventDto {
+
+	@SerializedName("user-id")
+	UUID userId;
+	
+	String title;
+	
+	String tag;
+	
+	@SerializedName("text-body")
+	String textBody;
+	
+	int priority;
+	
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UUID userId) {
+		this.userId = userId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	public String getTextBody() {
+		return textBody;
+	}
+
+	public void setTextBody(String textBody) {
+		this.textBody = textBody;
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+}
