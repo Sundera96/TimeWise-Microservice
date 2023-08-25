@@ -31,4 +31,8 @@ public class TaskEvent extends Event {
 	public void setComplete(boolean isComplete) {
 		this.isComplete = isComplete;
 	}
+	@Override
+	public <T> T export(IEventExporter<T> visitor) {
+		return visitor.exportTaskEvent(userId, title, tag, tag, textBody, priority, dateAssignedTo, isComplete);
+	}
 }

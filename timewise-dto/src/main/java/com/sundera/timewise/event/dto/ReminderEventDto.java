@@ -32,4 +32,8 @@ public class ReminderEventDto extends EventDto {
 	public void setRemindTime(LocalTime remindTime) {
 		this.remindTime = remindTime;
 	}
+	@Override
+	public <T> T eventImporter(IEventImporter<T> visitor) {
+		return visitor.importReminderTreatment(userId, title, tag, typeEvent, textBody, priority, startDate, endDate, remindTime);
+	}
 }

@@ -23,4 +23,8 @@ public class JournalEventDto extends EventDto {
 	public void setDateAssignedTo(LocalDate dateAssignedTo) {
 		this.dateAssignedTo = dateAssignedTo;
 	}
+	@Override
+	public <T> T eventImporter(IEventImporter<T> visitor) {
+		return visitor.importJournalTreatment(userId, imageName, imageName, imageName, imageName, priority, imageName, dateAssignedTo);
+	}
 }

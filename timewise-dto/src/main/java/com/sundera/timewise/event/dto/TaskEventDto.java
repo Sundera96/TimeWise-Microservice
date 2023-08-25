@@ -24,4 +24,8 @@ public class TaskEventDto extends EventDto {
 	public void setComplete(boolean isComplete) {
 		this.isComplete = isComplete;
 	}
+	@Override
+	public <T> T eventImporter(IEventImporter<T> visitor) {
+		return visitor.importTaskTreatment(userId, title, tag, typeEvent, textBody, priority, dateAssignedTo, isComplete);
+	}
 }

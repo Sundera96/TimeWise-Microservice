@@ -32,4 +32,8 @@ public class JournalEvent extends Event {
 	public void setDateAssignedTo(LocalDate dateAssignedTo) {
 		this.dateAssignedTo = dateAssignedTo;
 	}
+	@Override
+	public <T> T export(IEventExporter<T> visitor) {
+		return visitor.exportJournalEvent(userId, imageName, imageName, imageName, imageName, priority, imageName, dateAssignedTo);
+	}
 }

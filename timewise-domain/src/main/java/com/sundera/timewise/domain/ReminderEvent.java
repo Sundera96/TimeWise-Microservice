@@ -40,4 +40,8 @@ public class ReminderEvent extends Event {
 	public void setRemindTime(LocalTime remindTime) {
 		this.remindTime = remindTime;
 	}
+	@Override
+	public <T> T export(IEventExporter<T> visitor) {
+		return visitor.exportReminderEvent(userId, title, tag, tag, textBody, priority, startDate, endDate, remindTime);
+	}
 }

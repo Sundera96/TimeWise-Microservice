@@ -13,10 +13,15 @@ public abstract class EventDto {
 	
 	String tag;
 	
+	@SerializedName("type-tag")
+	String typeEvent;
+
 	@SerializedName("text-body")
 	String textBody;
 	
 	int priority;
+	
+	public abstract <T> T eventImporter(IEventImporter<T> visitor);
 	
 	public UUID getUserId() {
 		return userId;
@@ -56,5 +61,13 @@ public abstract class EventDto {
 
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+	
+	public String getTypeEvent() {
+		return typeEvent;
+	}
+
+	public void setTypeEvent(String typeEvent) {
+		this.typeEvent = typeEvent;
 	}
 }

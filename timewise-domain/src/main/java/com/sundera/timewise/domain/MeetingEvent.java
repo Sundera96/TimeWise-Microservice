@@ -46,4 +46,9 @@ public class MeetingEvent extends Event {
 	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
+
+	@Override
+	public <T> T export(IEventExporter<T> visitor) {
+		return visitor.exportMeetingEvent(userId, title, tag, tag, textBody, priority, dateOfMeeting, startTime, endTime);
+	}
 }

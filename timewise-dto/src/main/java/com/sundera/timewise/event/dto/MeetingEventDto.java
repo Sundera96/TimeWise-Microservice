@@ -32,5 +32,10 @@ public class MeetingEventDto extends EventDto {
 	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
+	@Override
+	public <T> T eventImporter(IEventImporter<T> visitor) {
+		return visitor.importMeetingTreatment(userId, title, tag, typeEvent, textBody, priority, dateOfMeeting, startTime, endTime);
+	}
+	
 	
 }

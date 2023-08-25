@@ -95,5 +95,7 @@ public abstract class Event {
 		this.id = id;
 	}
 	
+	public abstract <T> T export (IEventExporter<T> visitor);
+	
 }
 
