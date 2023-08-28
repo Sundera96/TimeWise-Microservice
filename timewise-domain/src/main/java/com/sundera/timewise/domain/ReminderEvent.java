@@ -8,32 +8,16 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class ReminderEvent extends Event {
-	LocalDate startDate;
-	LocalDate endDate;
 	LocalTime remindTime;
 	
 	public ReminderEvent() {
 		
 	}
-	public ReminderEvent(UUID userId, String title, String tag, String textBody, int priority, LocalDate startDate, LocalDate endDate, LocalTime remindTime) {
+	public ReminderEvent(UUID userId, String title, String tag, String textBody, int priority, LocalTime remindTime, LocalDate assignedDate) {
 		super(userId, title, tag, textBody, priority);
-		this.startDate=startDate;
-		this.endDate=endDate;
 		this.remindTime=remindTime;
 	}
 	
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-	public LocalDate getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
-	}
 	public LocalTime getRemindTime() {
 		return remindTime;
 	}
@@ -42,6 +26,6 @@ public class ReminderEvent extends Event {
 	}
 	@Override
 	public <T> T export(IEventExporter<T> visitor) {
-		return visitor.exportReminderEvent(userId, title, tag, tag, textBody, priority, startDate, endDate, remindTime);
+		return visitor.exportReminderEvent(userId, title, tag, textBody, priority,assignedDate,remindTime);
 	}
 }

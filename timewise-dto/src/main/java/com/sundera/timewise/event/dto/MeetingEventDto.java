@@ -1,25 +1,25 @@
 package com.sundera.timewise.event.dto;
 
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
 public class MeetingEventDto extends EventDto {
 	
-	@SerializedName("meeting-date")
-	LocalDate dateOfMeeting;
+	@SerializedName("start-date")
+	LocalDate startDate;
+	
+	@SerializedName("end-date")
+	LocalDate endDate;
+	
 	@SerializedName("start-time")
 	LocalTime startTime;
 	@SerializedName("end-time")
 	LocalTime endTime;
 	
-	public LocalDate getDateOfMeeting() {
-		return dateOfMeeting;
-	}
-	public void setDateOfMeeting(LocalDate dateOfMeeting) {
-		this.dateOfMeeting = dateOfMeeting;
-	}
 	public LocalTime getStartTime() {
 		return startTime;
 	}
@@ -32,9 +32,23 @@ public class MeetingEventDto extends EventDto {
 	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
+	
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+	
 	@Override
-	public <T> T eventImporter(IEventImporter<T> visitor) {
-		return visitor.importMeetingTreatment(userId, title, tag, typeEvent, textBody, priority, dateOfMeeting, startTime, endTime);
+	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
+		return visitor.importMeetingTreatment(userId, title, tag, textBody, priority, startDate,endDate, startTime, endTime);
 	}
 	
 	

@@ -8,7 +8,6 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class MeetingEvent extends Event {
-	LocalDate dateOfMeeting;
 	LocalTime startTime;
 	LocalTime endTime;
 	
@@ -18,17 +17,8 @@ public class MeetingEvent extends Event {
 	
 	public MeetingEvent(UUID userId, String title, String tag, String textBody, int priority, LocalDate dateOfMeeting, LocalTime starTime, LocalTime endTime) {
 		super(userId, title, tag, textBody, priority);
-		this.dateOfMeeting=dateOfMeeting;
 		this.startTime=starTime;
 		this.endTime=endTime;
-	}
-	
-	public LocalDate getDateOfMeeting() {
-		return dateOfMeeting;
-	}
-
-	public void setDateOfMeeting(LocalDate dateOfMeeting) {
-		this.dateOfMeeting = dateOfMeeting;
 	}
 
 	public LocalTime getStartTime() {
@@ -49,6 +39,6 @@ public class MeetingEvent extends Event {
 
 	@Override
 	public <T> T export(IEventExporter<T> visitor) {
-		return visitor.exportMeetingEvent(userId, title, tag, tag, textBody, priority, dateOfMeeting, startTime, endTime);
+		return visitor.exportMeetingEvent(userId, title, tag, textBody, priority, assignedDate,startTime, endTime);
 	}
 }
