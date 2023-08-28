@@ -22,31 +22,32 @@ public class EventExporter implements IEventExporter<EventDto> {
 	private EventDtoFactory dtoFactory;
 	
 	@Override
-	public EventDto exportReminderEvent(UUID userId, String title, String tag, String typeEvent, String textBody,
-			int priority, LocalDate startDate, LocalDate endDate, LocalTime remindTime) {
+	public EventDto exportReminderEvent(UUID userId, String title, String tag, String textBody,
+			int priority, LocalDate assignedDate, LocalTime remindTime) {
 		ReminderEventDto dto = dtoFactory.createReminderEventDto();
 		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);
 		dto.setPriority(priority);
-		dto.setStartDate(startDate);
-		dto.setEndDate(endDate);
+		dto.setStartDate(assignedDate);
+		dto.setEndDate(assignedDate);
 		dto.setRemindTime(remindTime);
 		dto.setTypeEvent("REMINDER");
 		return dto;
 	}
 
 	@Override
-	public EventDto exportMeetingEvent(UUID userId, String title, String tag, String typeEvent, String textBody,
-			int priority, LocalDate dateOfMeeting, LocalTime startTime, LocalTime endTime) {
+	public EventDto exportMeetingEvent(UUID userId, String title, String tag, String textBody,
+			int priority, LocalDate assignedDate, LocalTime startTime, LocalTime endTime) {
 		MeetingEventDto dto = dtoFactory.createMeetingEventDto();
 		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);
 		dto.setPriority(priority);
-		dto.setDateOfMeeting(dateOfMeeting);
+		dto.setStartDate(assignedDate);
+		dto.setEndDate(assignedDate);
 		dto.setStartTime(startTime);
 		dto.setEndTime(endTime);
 		dto.setTypeEvent("MEETING");
@@ -54,23 +55,23 @@ public class EventExporter implements IEventExporter<EventDto> {
 	}
 
 	@Override
-	public EventDto exportTaskEvent(UUID userId, String title, String tag, String typeEvent, String textBody,
-			int priority, LocalDate dateAssignedTo, boolean isComplete) {
+	public EventDto exportTaskEvent(UUID userId, String title, String tag, String textBody,
+			int priority, LocalDate assignedDate, boolean isComplete) {
 		TaskEventDto dto = dtoFactory.createTaskEventDto();
 		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);
 		dto.setPriority(priority);
-		dto.setDateAssignedTo(dateAssignedTo);
+		dto.setDate(assignedDate);
 		dto.setComplete(isComplete);
 		dto.setTypeEvent("TASK");
 		return dto;
 	}
 
 	@Override
-	public EventDto exportJournalEvent(UUID userId, String title, String tag, String typeEvent, String textBody,
-			int priority, String imageName, LocalDate dateAssignedTo) {
+	public EventDto exportJournalEvent(UUID userId, String title, String tag, String textBody,
+			int priority,LocalDate assignedDate, String imageName) {
 		JournalEventDto dto =dtoFactory.createJournalEventDto();
 		dto.setUserId(userId);
 		dto.setTitle(title);
@@ -78,7 +79,7 @@ public class EventExporter implements IEventExporter<EventDto> {
 		dto.setTextBody(textBody);
 		dto.setPriority(priority);
 		dto.setImageName(imageName);
-		dto.setDateAssignedTo(dateAssignedTo);
+		dto.setAssignedDate(assignedDate);
 		dto.setTypeEvent("JOURNAL");
 		return dto;
 	}

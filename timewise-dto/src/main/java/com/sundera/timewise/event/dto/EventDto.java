@@ -1,5 +1,5 @@
 package com.sundera.timewise.event.dto;
-
+import java.util.List;
 import java.util.UUID;
 
 import com.google.gson.annotations.SerializedName;
@@ -20,8 +20,8 @@ public abstract class EventDto {
 	String textBody;
 	
 	int priority;
-	
-	public abstract <T> T eventImporter(IEventImporter<T> visitor);
+
+	public abstract <T> List<T> eventImporter(IEventImporter<T> visitor);
 	
 	public UUID getUserId() {
 		return userId;

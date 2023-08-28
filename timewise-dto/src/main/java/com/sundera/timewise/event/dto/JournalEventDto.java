@@ -1,6 +1,6 @@
 package com.sundera.timewise.event.dto;
-
 import java.time.LocalDate;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -9,22 +9,23 @@ public class JournalEventDto extends EventDto {
 	String imageName;
 	
 	@SerializedName("date-assigned")
-	LocalDate dateAssignedTo;
+	LocalDate assignedDate;
 	
+	public LocalDate getAssignedDate() {
+		return assignedDate;
+	}
+	public void setAssignedDate(LocalDate assignedDate) {
+		this.assignedDate = assignedDate;
+	}
 	public String getImageName() {
 		return imageName;
 	}
 	public void setImageName(String imageName) {
 		this.imageName = imageName;
 	}
-	public LocalDate getDateAssignedTo() {
-		return dateAssignedTo;
-	}
-	public void setDateAssignedTo(LocalDate dateAssignedTo) {
-		this.dateAssignedTo = dateAssignedTo;
-	}
+	
 	@Override
-	public <T> T eventImporter(IEventImporter<T> visitor) {
-		return visitor.importJournalTreatment(userId, imageName, imageName, imageName, imageName, priority, imageName, dateAssignedTo);
+	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
+		return visitor.importJournalTreatment(userId,title,tag, textBody, priority, assignedDate, imageName);
 	}
 }

@@ -1,22 +1,22 @@
 package com.sundera.timewise.event.dto;
-
 import java.time.LocalDate;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
 public class TaskEventDto extends EventDto {
 	
-	@SerializedName("date-assigned")
-	LocalDate dateAssignedTo;
-	
 	@SerializedName("is-complete")
 	boolean isComplete;
 	
-	public LocalDate getDateAssignedTo() {
-		return dateAssignedTo;
+	@SerializedName("task-date")
+	LocalDate date;
+	
+	public LocalDate getDate() {
+		return date;
 	}
-	public void setDateAssignedTo(LocalDate dateAssignedTo) {
-		this.dateAssignedTo = dateAssignedTo;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	public boolean isComplete() {
 		return isComplete;
@@ -25,7 +25,8 @@ public class TaskEventDto extends EventDto {
 		this.isComplete = isComplete;
 	}
 	@Override
-	public <T> T eventImporter(IEventImporter<T> visitor) {
-		return visitor.importTaskTreatment(userId, title, tag, typeEvent, textBody, priority, dateAssignedTo, isComplete);
+	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
+		// TODO Auto-generated method stub
+		return visitor.importTaskTreatment(userId, title, tag, textBody, priority, date, isComplete);
 	}
 }

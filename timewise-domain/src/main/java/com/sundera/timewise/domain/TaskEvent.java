@@ -33,6 +33,6 @@ public class TaskEvent extends Event {
 	}
 	@Override
 	public <T> T export(IEventExporter<T> visitor) {
-		return visitor.exportTaskEvent(userId, title, tag, tag, textBody, priority, dateAssignedTo, isComplete);
+		return visitor.exportTaskEvent(userId, title, tag, textBody, priority, assignedDate, isComplete);
 	}
 }

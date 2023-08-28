@@ -1,6 +1,8 @@
 package com.sundera.timewise.event.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.time.LocalTime;
 import java.util.UUID;
 
@@ -22,52 +24,66 @@ public class EventImporter implements IEventImporter<Event> {
 	private EventFactory eventFactory;
 
 	@Override
-	public Event importReminderTreatment(UUID userId, String title, String tag, String typeEvent, String textBody,
+	public List<Event> importReminderTreatment(UUID userId, String title, String tag, String textBody,
 			int priority, LocalDate startDate, LocalDate endDate, LocalTime remindTime) {
-		ReminderEvent event = eventFactory.createReminderEvent();
-		event.setUserId(userId);
-		event.setTitle(title);
-		event.setTag(tag);
-		event.setTextBody(textBody);
-		event.setPriority(priority);
-		event.setStartDate(startDate);
-		event.setEndDate(endDate);
-		event.setRemindTime(remindTime);
-		return event;
+		LocalDate currDate = startDate;
+		List<Event> listOfEvent = new ArrayList<>();
+		while(currDate.isBefore(endDate)) {
+			ReminderEvent event = eventFactory.createReminderEvent();
+			event.setUserId(userId);
+			event.setTitle(title);
+			event.setTag(tag);
+			event.setTextBody(textBody);
+			event.setPriority(priority);
+			event.setAssignedDate(currDate);
+			event.setRemindTime(remindTime);
+			listOfEvent.add(event);
+			currDate = currDate.plusDays(1);
+		}
+		return listOfEvent;
 	}
 
 	@Override
-	public Event importMeetingTreatment(UUID userId, String title, String tag, String typeEvent, String textBody,
-			int priority, LocalDate dateOfMeeting, LocalTime startTime, LocalTime endTime) {
-		MeetingEvent event = eventFactory.createMeetingEvent();
-		event.setUserId(userId);
-		event.setTitle(title);
-		event.setTag(tag);
-		event.setTextBody(textBody);
-		event.setPriority(priority);
-		event.setDateOfMeeting(dateOfMeeting);
-		event.setStartTime(startTime);
-		event.setEndTime(endTime);
-		return event;
+	public List<Event> importMeetingTreatment(UUID userId, String title, String tag, String textBody,
+			int priority, LocalDate startDate,LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+		LocalDate currDate = startDate;
+		List<Event> listOfEvent = new ArrayList<>();
+		while(currDate.isBefore(endDate)) {
+			MeetingEvent event = eventFactory.createMeetingEvent();
+			event.setUserId(userId);
+			event.setTitle(title);
+			event.setTag(tag);
+			event.setTextBody(textBody);
+			event.setPriority(priority);
+			event.setAssignedDate(currDate);
+			event.setStartTime(startTime);
+			event.setEndTime(endTime);
+			listOfEvent.add(event);
+			currDate = currDate.plusDays(1);
+		}
+		return listOfEvent;
 	}
 
 	@Override
-	public Event importTaskTreatment(UUID userId, String title, String tag, String typeEvent, String textBody,
-			int priority, LocalDate dateAssignedTo, boolean isComplete) {
+	public List<Event> importTaskTreatment(UUID userId, String title, String tag, String textBody,
+			int priority, LocalDate assignedDate, boolean isComplete) {
+		List<Event> listOfEvent = new ArrayList<>();
 		TaskEvent event = eventFactory.createTaskEvent();
 		event.setUserId(userId);
 		event.setTitle(title);
 		event.setTag(tag);
 		event.setTextBody(textBody);
 		event.setPriority(priority);
-		event.setDateAssignedTo(dateAssignedTo);
+		event.setDateAssignedTo(assignedDate);
 		event.setComplete(isComplete);
-		return event;
+		listOfEvent.add(event);
+		return listOfEvent;
 	}
 
 	@Override
-	public Event importJournalTreatment(UUID userId, String title, String tag, String typeEvent, String textBody,
-			int priority, String imageName, LocalDate dateAssignedTo) {
+	public List<Event> importJournalTreatment(UUID userId, String title, String tag, String textBody,
+			int priority, LocalDate assignedDate,String imageName) {
+		List<Event> listOfEvent = new ArrayList<>();
 		JournalEvent event = eventFactory.createJournalEvent();
 		event.setUserId(userId);
 		event.setTitle(title);
@@ -75,8 +91,9 @@ public class EventImporter implements IEventImporter<Event> {
 		event.setTextBody(textBody);
 		event.setPriority(priority);
 		event.setImageName(imageName);
-		event.setDateAssignedTo(dateAssignedTo);
-		return event;
+		event.setAssignedDate(assignedDate);
+		listOfEvent.add(event);
+		return listOfEvent;
 	}
 
 }
