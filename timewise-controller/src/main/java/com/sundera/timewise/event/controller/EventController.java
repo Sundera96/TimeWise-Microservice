@@ -23,6 +23,7 @@ public class EventController {
 	
 	@Autowired
 	private IEventService eventService;
+
 	
 	@PostMapping
 	public void createEvent(@RequestBody String eventJson) {
@@ -32,9 +33,10 @@ public class EventController {
 	}
 	
 	@GetMapping("/{userId}/{eventId}")
-	public EventDto getProduct(@PathVariable String eventId, @PathVariable String userId) throws Exception {
+	public String getProduct(@PathVariable String userId,@PathVariable String eventId) throws Exception {
 		try {
-			return eventService.getEvent(UUID.fromString(eventId),UUID.fromString(userId));
+			Gson gson = GsonFactory.createGson();
+			return gson.toJson(eventService.getEvent(UUID.fromString(userId),UUID.fromString(eventId)));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new Exception("Invalid String Id");
@@ -42,10 +44,11 @@ public class EventController {
 	}
 	
 	@GetMapping("{userId}/events/{startDate}/{endDate}")
-	public List<EventViewDto> getEvents(@PathVariable String userId,@PathVariable String startDate,@PathVariable String endDate,List<String> filter) throws Exception{
+	public String getEvents(@PathVariable String userId,@PathVariable String startDate,@PathVariable String endDate) throws Exception{
 		Gson gson = GsonFactory.createGson();
 		try {
-			return eventService.getAllEvents(UUID.fromString(userId),gson.fromJson(startDate,LocalDate.class), gson.fromJson(startDate,LocalDate.class));
+			List<EventViewDto> dtos =  eventService.getAllEvents(UUID.fromString(userId),gson.fromJson(startDate,LocalDate.class), gson.fromJson(endDate,LocalDate.class));
+			return gson.toJson(dtos);
 		}catch(Exception e) {
 			throw new Exception("Invalid arguments passed in getEvents()");
 		}

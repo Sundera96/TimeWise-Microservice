@@ -5,6 +5,12 @@ import com.google.gson.annotations.SerializedName;
 public class EventViewJournalDto extends EventViewDto {
 	@SerializedName("image-name")
 	String imageName;
-	@SerializedName("date-assigned")
-	String dateAssigned;
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
 }

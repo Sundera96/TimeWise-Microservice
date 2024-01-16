@@ -4,40 +4,70 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sundera.timewise.domain.IEventExporter;
 import com.sundera.timewise.event.view.dto.EventViewDto;
+import com.sundera.timewise.event.view.dto.EventViewJournalDto;
+import com.sundera.timewise.event.view.dto.EventViewMeetingDto;
+import com.sundera.timewise.event.view.dto.EventViewReminderDto;
+import com.sundera.timewise.event.view.dto.EventViewTaskDto;
+import com.sundera.timewise.event.view.dto.IEventViewDtoFactory;
 
 @Component
 public class EventViewExporter implements IEventExporter<EventViewDto> {
+	
+	@Autowired
+	private IEventViewDtoFactory eventViewDtoFactory;
 
 	@Override
-	public EventViewDto exportReminderEvent(UUID userId, String title, String tag, String textBody, int priority,
+	public EventViewReminderDto exportReminderEvent(UUID userId, String title, String tag, String textBody, int priority,
 			LocalDate assignedDate, LocalTime remindTime) {
-		// TODO Auto-generated method stub
-		return null;
+		EventViewReminderDto dto = eventViewDtoFactory.createEventViewReminderDto();
+		dto.setTitle(title);
+		dto.setTag(tag);
+		dto.setDateAssigned(assignedDate);
+		dto.setRemindTime(remindTime);
+		dto.setEventType("REMINDER");
+		return dto;
 	}
 
 	@Override
-	public EventViewDto exportMeetingEvent(UUID userId, String title, String tag, String textBody, int priority,
+	public EventViewMeetingDto exportMeetingEvent(UUID userId, String title, String tag, String textBody, int priority,
 			LocalDate assignedDate, LocalTime startTime, LocalTime endTime) {
-		// TODO Auto-generated method stub
-		return null;
+		EventViewMeetingDto dto = eventViewDtoFactory.createEventViewMeetingDto();
+		dto.setTitle(title);
+		dto.setTag(tag);
+		dto.setDateAssigned(assignedDate);
+		dto.setStartTime(startTime);
+		dto.setEndTime(endTime);
+		dto.setEventType("MEETING");
+		return dto;
 	}
 
 	@Override
-	public EventViewDto exportTaskEvent(UUID userId, String title, String tag, String textBody, int priority,
+	public EventViewTaskDto exportTaskEvent(UUID userId, String title, String tag, String textBody, int priority,
 			LocalDate assignedDate, boolean isComplete) {
-		// TODO Auto-generated method stub
-		return null;
+		EventViewTaskDto dto = eventViewDtoFactory.createEventViewTaskDto();
+		dto.setTitle(title);
+		dto.setTag(tag);
+		dto.setDateAssigned(assignedDate);
+		dto.setComplete(isComplete);
+		dto.setEventType("TASK");
+		return dto;
 	}
 
 	@Override
-	public EventViewDto exportJournalEvent(UUID userId, String title, String tag, String textBody, int priority,
+	public EventViewJournalDto exportJournalEvent(UUID userId, String title, String tag, String textBody, int priority,
 			LocalDate assignedDate, String imageName) {
-		// TODO Auto-generated method stub
-		return null;
+		EventViewJournalDto dto = eventViewDtoFactory.createEventViewJournalDto();
+		dto.setTitle(title);
+		dto.setTag(tag);
+		dto.setDateAssigned(assignedDate);
+		dto.setImageName(imageName);
+		dto.setEventType("JOURNAL");
+		return dto;
 	}
 	
 }

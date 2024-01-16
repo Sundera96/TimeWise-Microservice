@@ -24,7 +24,7 @@ public class ReminderEventDto extends EventDto {
 	}
 	@Override
 	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
-		return visitor.importReminderTreatment(userId, title, tag, textBody, priority,startDate,endDate, remindTime);
+		return visitor.importReminder(userId, title, tag, textBody, priority,startDate,endDate, remindTime);
 	}
 	
 	public LocalDate getStartDate() {

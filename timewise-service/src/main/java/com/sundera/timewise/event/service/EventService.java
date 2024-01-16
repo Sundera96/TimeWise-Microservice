@@ -57,7 +57,9 @@ public class EventService implements IEventService {
 	}
 
 	@Override
-	public EventDto getEvent(UUID eventId,UUID userId) throws Exception {
+	public EventDto getEvent(UUID userId,UUID eventId) throws Exception {
+		System.out.println("User Id : "+ userId);
+		System.out.println("Event Id : "+ eventId);
 		Optional<Event> optionalEvent = eventRepository.findById(eventId);
 		if(optionalEvent==null) {
 			throw new Exception("Event of the id does not exist");
@@ -68,12 +70,10 @@ public class EventService implements IEventService {
 	@Override
 	public List<EventViewDto> getAllEvents(UUID userId, LocalDate startDate, LocalDate endDate) {
 		List<EventViewDto> listOfEventViewDto = new ArrayList<>();
-		List<Event> listOfEvents = eventRepository.findByUserId(userId);
+		List<Event> listOfEvents = eventRepository.findByUserIdAndAssignedDateBetween(userId,startDate,endDate);
 		for(Event event:listOfEvents) {
 			listOfEventViewDto.add(event.export(eventViewExporter));
 		}
 		return listOfEventViewDto;
 	}
-
-
 }

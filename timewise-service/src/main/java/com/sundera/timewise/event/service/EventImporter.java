@@ -24,11 +24,11 @@ public class EventImporter implements IEventImporter<Event> {
 	private EventFactory eventFactory;
 
 	@Override
-	public List<Event> importReminderTreatment(UUID userId, String title, String tag, String textBody,
+	public List<Event> importReminder(UUID userId, String title, String tag, String textBody,
 			int priority, LocalDate startDate, LocalDate endDate, LocalTime remindTime) {
 		LocalDate currDate = startDate;
 		List<Event> listOfEvent = new ArrayList<>();
-		while(currDate.isBefore(endDate)) {
+		while(currDate.isBefore(endDate)||currDate.isEqual(endDate)) {
 			ReminderEvent event = eventFactory.createReminderEvent();
 			event.setUserId(userId);
 			event.setTitle(title);
@@ -44,11 +44,11 @@ public class EventImporter implements IEventImporter<Event> {
 	}
 
 	@Override
-	public List<Event> importMeetingTreatment(UUID userId, String title, String tag, String textBody,
+	public List<Event> importMeeting(UUID userId, String title, String tag, String textBody,
 			int priority, LocalDate startDate,LocalDate endDate, LocalTime startTime, LocalTime endTime) {
 		LocalDate currDate = startDate;
 		List<Event> listOfEvent = new ArrayList<>();
-		while(currDate.isBefore(endDate)) {
+		while(currDate.isBefore(endDate)||currDate.isEqual(endDate)) {
 			MeetingEvent event = eventFactory.createMeetingEvent();
 			event.setUserId(userId);
 			event.setTitle(title);
@@ -65,7 +65,7 @@ public class EventImporter implements IEventImporter<Event> {
 	}
 
 	@Override
-	public List<Event> importTaskTreatment(UUID userId, String title, String tag, String textBody,
+	public List<Event> importTask(UUID userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate, boolean isComplete) {
 		List<Event> listOfEvent = new ArrayList<>();
 		TaskEvent event = eventFactory.createTaskEvent();
@@ -81,7 +81,7 @@ public class EventImporter implements IEventImporter<Event> {
 	}
 
 	@Override
-	public List<Event> importJournalTreatment(UUID userId, String title, String tag, String textBody,
+	public List<Event> importJournal(UUID userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate,String imageName) {
 		List<Event> listOfEvent = new ArrayList<>();
 		JournalEvent event = eventFactory.createJournalEvent();
