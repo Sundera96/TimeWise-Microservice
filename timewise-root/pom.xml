@@ -22,7 +22,7 @@
 		<module>../timewise-controller</module>
 		<module>../timewise-media-storage</module>
 		<module>../timewise-api-gateway</module>
-		<module>../timewise-authentication-service</module>
+		<module>../timewise-security</module>
 	</modules>
 	<properties>
 		<java.version>17</java.version>
