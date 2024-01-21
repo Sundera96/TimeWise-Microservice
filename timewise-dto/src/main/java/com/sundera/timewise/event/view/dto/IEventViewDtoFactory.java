@@ -2,8 +2,8 @@ package com.sundera.timewise.event.view.dto;
 
 public interface IEventViewDtoFactory {
 	
-	public EventViewDto createEventViewReminderDto();
-	public EventViewDto createEventViewMeetingDto();
-	public EventViewDto createEventViewTaskDto();
-	public EventViewDto createEventViewJournalDto();
+	public EventViewReminderDto createEventViewReminderDto();
+	public EventViewMeetingDto createEventViewMeetingDto();
+	public EventViewTaskDto createEventViewTaskDto();
+	public EventViewJournalDto createEventViewJournalDto();
 }

@@ -26,6 +26,6 @@ public class JournalEventDto extends EventDto {
 	
 	@Override
 	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
-		return visitor.importJournalTreatment(userId,title,tag, textBody, priority, assignedDate, imageName);
+		return visitor.importJournal(userId,title,tag, textBody, priority, assignedDate, imageName);
 	}
 }

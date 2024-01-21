@@ -27,6 +27,6 @@ public class TaskEventDto extends EventDto {
 	@Override
 	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
 		// TODO Auto-generated method stub
-		return visitor.importTaskTreatment(userId, title, tag, textBody, priority, date, isComplete);
+		return visitor.importTask(userId, title, tag, textBody, priority, date, isComplete);
 	}
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.sundera.timewise.domain.IEventExporter;
 import com.sundera.timewise.event.dto.EventDto;
-import com.sundera.timewise.event.dto.EventDtoFactory;
+import com.sundera.timewise.event.dto.IEventDtoFactory;
 import com.sundera.timewise.event.dto.JournalEventDto;
 import com.sundera.timewise.event.dto.MeetingEventDto;
 import com.sundera.timewise.event.dto.ReminderEventDto;
@@ -19,7 +19,7 @@ import com.sundera.timewise.event.dto.TaskEventDto;
 public class EventExporter implements IEventExporter<EventDto> {
 
 	@Autowired
-	private EventDtoFactory dtoFactory;
+	private IEventDtoFactory dtoFactory;
 	
 	@Override
 	public EventDto exportReminderEvent(UUID userId, String title, String tag, String textBody,

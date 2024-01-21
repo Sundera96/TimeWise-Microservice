@@ -48,8 +48,6 @@ public class MeetingEventDto extends EventDto {
 	
 	@Override
 	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
-		return visitor.importMeetingTreatment(userId, title, tag, textBody, priority, startDate,endDate, startTime, endTime);
+		return visitor.importMeeting(userId, title, tag, textBody, priority, startDate,endDate, startTime, endTime);
 	}
-	
-	
 }
