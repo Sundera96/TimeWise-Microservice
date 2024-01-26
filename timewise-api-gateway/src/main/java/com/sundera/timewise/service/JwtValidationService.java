@@ -16,13 +16,6 @@ import io.jsonwebtoken.security.Keys;
 public class JwtValidationService {
 	private static final String Secret="ShlE+B6prFIfXGmm2OVig8lT+sjrjSNXp+LVLL1hS7w=";
 	
-//	public void validateToken(String token) {
-//		Jwts.parser()
-//		.verifyWith(getSignInKey())
-//		.build()
-//		.parseSignedClaims(token);
-//	}
-	
 	private SecretKey getSignInKey() {
 		byte[] keyBytes = Decoders.BASE64.decode(Secret);
 		return Keys.hmacShaKeyFor(keyBytes);
