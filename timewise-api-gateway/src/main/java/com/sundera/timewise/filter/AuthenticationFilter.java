@@ -29,8 +29,16 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 				final String token;
 				if(authHeader!=null&&authHeader.startsWith("Bearer")) {
 					token = authHeader.substring(7);
-					if(jwtValidationService.isTokenExpired(token)) {
+					try {
+						jwtValidationService.isTokenExpired(token);
+						System.out.println("Validation Successful");
+						String userId = jwtValidationService.extractUsername(token);
+						exchange.getRequest().mutate().header("userId",userId).build();
+					}catch(Exception exception) {
+						System.out.println("Inside catch block");
+						exception.printStackTrace();
 						exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+						return exchange.getResponse().setComplete();
 					}
 				}
 			}

@@ -1,13 +1,11 @@
 package com.sundera.timewise.event.dto;
 import java.util.List;
-import java.util.UUID;
 
 import com.google.gson.annotations.SerializedName;
 
 public abstract class EventDto {
-
-	@SerializedName("user-id")
-	UUID userId;
+	
+	String userId;
 	
 	String title;
 	
@@ -23,11 +21,11 @@ public abstract class EventDto {
 
 	public abstract <T> List<T> eventImporter(IEventImporter<T> visitor);
 	
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

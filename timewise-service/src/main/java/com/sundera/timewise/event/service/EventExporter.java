@@ -2,11 +2,8 @@ package com.sundera.timewise.event.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.sundera.timewise.domain.IEventExporter;
 import com.sundera.timewise.event.dto.EventDto;
 import com.sundera.timewise.event.dto.IEventDtoFactory;
@@ -22,10 +19,9 @@ public class EventExporter implements IEventExporter<EventDto> {
 	private IEventDtoFactory dtoFactory;
 	
 	@Override
-	public EventDto exportReminderEvent(UUID userId, String title, String tag, String textBody,
+	public EventDto exportReminderEvent(String userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate, LocalTime remindTime) {
 		ReminderEventDto dto = dtoFactory.createReminderEventDto();
-		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);
@@ -38,10 +34,9 @@ public class EventExporter implements IEventExporter<EventDto> {
 	}
 
 	@Override
-	public EventDto exportMeetingEvent(UUID userId, String title, String tag, String textBody,
+	public EventDto exportMeetingEvent(String userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate, LocalTime startTime, LocalTime endTime) {
 		MeetingEventDto dto = dtoFactory.createMeetingEventDto();
-		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);
@@ -55,10 +50,9 @@ public class EventExporter implements IEventExporter<EventDto> {
 	}
 
 	@Override
-	public EventDto exportTaskEvent(UUID userId, String title, String tag, String textBody,
+	public EventDto exportTaskEvent(String userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate, boolean isComplete) {
 		TaskEventDto dto = dtoFactory.createTaskEventDto();
-		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);
@@ -70,10 +64,9 @@ public class EventExporter implements IEventExporter<EventDto> {
 	}
 
 	@Override
-	public EventDto exportJournalEvent(UUID userId, String title, String tag, String textBody,
+	public EventDto exportJournalEvent(String userId, String title, String tag, String textBody,
 			int priority,LocalDate assignedDate, String imageName) {
 		JournalEventDto dto =dtoFactory.createJournalEventDto();
-		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);

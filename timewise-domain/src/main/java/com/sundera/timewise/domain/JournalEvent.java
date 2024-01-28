@@ -1,8 +1,6 @@
 package com.sundera.timewise.domain;
 
 import java.time.LocalDate;
-import java.util.UUID;
-
 import jakarta.persistence.Entity;
 
 
@@ -13,7 +11,7 @@ public class JournalEvent extends Event {
 	public JournalEvent() {
 		
 	}
-	JournalEvent(UUID userId, String title, String tag, String textBody, int priority, String imageName, LocalDate dateAssignedTo) {
+	JournalEvent(String userId, String title, String tag, String textBody, int priority, String imageName, LocalDate dateAssignedTo) {
 		super(userId, title, tag, textBody, priority);
 		this.imageName=imageName;
 	}

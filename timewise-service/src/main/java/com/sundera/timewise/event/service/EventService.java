@@ -57,7 +57,7 @@ public class EventService implements IEventService {
 	}
 
 	@Override
-	public EventDto getEvent(UUID userId,UUID eventId) throws Exception {
+	public EventDto getEvent(String userId,UUID eventId) throws Exception {
 		System.out.println("User Id : "+ userId);
 		System.out.println("Event Id : "+ eventId);
 		Optional<Event> optionalEvent = eventRepository.findById(eventId);
@@ -68,7 +68,7 @@ public class EventService implements IEventService {
 	}
 
 	@Override
-	public List<EventViewDto> getAllEvents(UUID userId, LocalDate startDate, LocalDate endDate) {
+	public List<EventViewDto> getAllEvents(String userId, LocalDate startDate, LocalDate endDate) {
 		List<EventViewDto> listOfEventViewDto = new ArrayList<>();
 		List<Event> listOfEvents = eventRepository.findByUserIdAndAssignedDateBetween(userId,startDate,endDate);
 		for(Event event:listOfEvents) {

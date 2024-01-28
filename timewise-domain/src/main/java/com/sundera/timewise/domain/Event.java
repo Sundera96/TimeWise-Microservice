@@ -2,10 +2,10 @@ package com.sundera.timewise.domain;
 
 import java.time.LocalDate;
 import java.util.UUID;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
@@ -16,7 +16,9 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name="event")
+@Table(name="event",indexes = {
+		@Index(columnList = "userId")
+})
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Event {
 	
@@ -24,8 +26,8 @@ public abstract class Event {
 	@GeneratedValue
 	protected UUID id;
 
-	@Column(nullable = false)
-	UUID userId;
+	@NotNull
+	String userId;
 	
 	@NotNull
 	String title;
@@ -49,7 +51,7 @@ public abstract class Event {
 		
 	}
 	
-	Event(UUID userId, String title, String tag,String textBody, int priority){
+	Event(String userId, String title, String tag,String textBody, int priority){
 		this.userId=userId;
 		this.title=title;
 		this.tag=tag;
@@ -57,11 +59,11 @@ public abstract class Event {
 		this.priority=priority;
 	}
 	
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

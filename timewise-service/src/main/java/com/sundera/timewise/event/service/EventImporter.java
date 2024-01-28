@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalTime;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +22,7 @@ public class EventImporter implements IEventImporter<Event> {
 	private EventFactory eventFactory;
 
 	@Override
-	public List<Event> importReminder(UUID userId, String title, String tag, String textBody,
+	public List<Event> importReminder(String userId, String title, String tag, String textBody,
 			int priority, LocalDate startDate, LocalDate endDate, LocalTime remindTime) {
 		LocalDate currDate = startDate;
 		List<Event> listOfEvent = new ArrayList<>();
@@ -44,7 +42,7 @@ public class EventImporter implements IEventImporter<Event> {
 	}
 
 	@Override
-	public List<Event> importMeeting(UUID userId, String title, String tag, String textBody,
+	public List<Event> importMeeting(String userId, String title, String tag, String textBody,
 			int priority, LocalDate startDate,LocalDate endDate, LocalTime startTime, LocalTime endTime) {
 		LocalDate currDate = startDate;
 		List<Event> listOfEvent = new ArrayList<>();
@@ -65,7 +63,7 @@ public class EventImporter implements IEventImporter<Event> {
 	}
 
 	@Override
-	public List<Event> importTask(UUID userId, String title, String tag, String textBody,
+	public List<Event> importTask(String userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate, boolean isComplete) {
 		List<Event> listOfEvent = new ArrayList<>();
 		TaskEvent event = eventFactory.createTaskEvent();
@@ -81,7 +79,7 @@ public class EventImporter implements IEventImporter<Event> {
 	}
 
 	@Override
-	public List<Event> importJournal(UUID userId, String title, String tag, String textBody,
+	public List<Event> importJournal(String userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate,String imageName) {
 		List<Event> listOfEvent = new ArrayList<>();
 		JournalEvent event = eventFactory.createJournalEvent();

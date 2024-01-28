@@ -40,4 +40,8 @@ public class JwtValidationService {
 		.build()
 		.parseSignedClaims(token).getPayload();
 	}
+	
+	public String extractUsername(String token) {
+		return extractClaim(token,(claim)->claim.getSubject());
+	}
 }

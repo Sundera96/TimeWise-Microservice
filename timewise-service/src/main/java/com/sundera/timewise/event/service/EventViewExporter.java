@@ -2,8 +2,6 @@ package com.sundera.timewise.event.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +20,7 @@ public class EventViewExporter implements IEventExporter<EventViewDto> {
 	private IEventViewDtoFactory eventViewDtoFactory;
 
 	@Override
-	public EventViewReminderDto exportReminderEvent(UUID userId, String title, String tag, String textBody, int priority,
+	public EventViewReminderDto exportReminderEvent(String userId, String title, String tag, String textBody, int priority,
 			LocalDate assignedDate, LocalTime remindTime) {
 		EventViewReminderDto dto = eventViewDtoFactory.createEventViewReminderDto();
 		dto.setTitle(title);
@@ -34,7 +32,7 @@ public class EventViewExporter implements IEventExporter<EventViewDto> {
 	}
 
 	@Override
-	public EventViewMeetingDto exportMeetingEvent(UUID userId, String title, String tag, String textBody, int priority,
+	public EventViewMeetingDto exportMeetingEvent(String userId, String title, String tag, String textBody, int priority,
 			LocalDate assignedDate, LocalTime startTime, LocalTime endTime) {
 		EventViewMeetingDto dto = eventViewDtoFactory.createEventViewMeetingDto();
 		dto.setTitle(title);
@@ -47,7 +45,7 @@ public class EventViewExporter implements IEventExporter<EventViewDto> {
 	}
 
 	@Override
-	public EventViewTaskDto exportTaskEvent(UUID userId, String title, String tag, String textBody, int priority,
+	public EventViewTaskDto exportTaskEvent(String userId, String title, String tag, String textBody, int priority,
 			LocalDate assignedDate, boolean isComplete) {
 		EventViewTaskDto dto = eventViewDtoFactory.createEventViewTaskDto();
 		dto.setTitle(title);
@@ -59,7 +57,7 @@ public class EventViewExporter implements IEventExporter<EventViewDto> {
 	}
 
 	@Override
-	public EventViewJournalDto exportJournalEvent(UUID userId, String title, String tag, String textBody, int priority,
+	public EventViewJournalDto exportJournalEvent(String userId, String title, String tag, String textBody, int priority,
 			LocalDate assignedDate, String imageName) {
 		EventViewJournalDto dto = eventViewDtoFactory.createEventViewJournalDto();
 		dto.setTitle(title);

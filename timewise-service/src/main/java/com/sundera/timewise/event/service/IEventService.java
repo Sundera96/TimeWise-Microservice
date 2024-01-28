@@ -22,8 +22,8 @@ public interface IEventService {
 	 * @return
 	 * @throws Exception 
 	 */
-	EventDto getEvent(UUID eventId, UUID userId) throws Exception;
+	EventDto getEvent(String userId,UUID eventId) throws Exception;
 	
-	List<EventViewDto> getAllEvents(UUID userId,LocalDate startDate,LocalDate LocalDate);
+	List<EventViewDto> getAllEvents(String userId,LocalDate startDate,LocalDate LocalDate);
 
 }

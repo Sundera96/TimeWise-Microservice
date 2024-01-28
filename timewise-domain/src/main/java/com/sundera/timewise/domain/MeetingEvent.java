@@ -2,8 +2,6 @@ package com.sundera.timewise.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.UUID;
-
 import jakarta.persistence.Entity;
 
 @Entity
@@ -15,7 +13,7 @@ public class MeetingEvent extends Event {
 		
 	}
 	
-	public MeetingEvent(UUID userId, String title, String tag, String textBody, int priority, LocalDate dateOfMeeting, LocalTime starTime, LocalTime endTime) {
+	public MeetingEvent(String userId, String title, String tag, String textBody, int priority, LocalDate dateOfMeeting, LocalTime starTime, LocalTime endTime) {
 		super(userId, title, tag, textBody, priority);
 		this.startTime=starTime;
 		this.endTime=endTime;
