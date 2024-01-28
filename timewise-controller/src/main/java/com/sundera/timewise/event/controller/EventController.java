@@ -27,7 +27,8 @@ public class EventController {
 
 	
 	@PostMapping
-	public void createEvent(@RequestHeader(value="userId") String userId,@RequestBody String eventJson) {
+	public void createEvent(@RequestHeader String userId,@RequestBody String eventJson) {
+		System.out.println("I am controller");
 		Gson gson = GsonFactory.createGson();
 		EventDto eventDto = gson.fromJson(eventJson,EventDto.class);
 		eventDto.setUserId(userId);

@@ -31,9 +31,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 					token = authHeader.substring(7);
 					try {
 						jwtValidationService.isTokenExpired(token);
-						System.out.println("Validation Successful");
 						String userId = jwtValidationService.extractUsername(token);
 						exchange.getRequest().mutate().header("userId",userId).build();
+						System.out.println("Validation Successful");
 					}catch(Exception exception) {
 						System.out.println("Inside catch block");
 						exception.printStackTrace();
