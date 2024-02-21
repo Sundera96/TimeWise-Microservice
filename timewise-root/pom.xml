@@ -16,10 +16,9 @@
 	<name>timewise-root</name>
 	<description>Demo project for Spring Boot</description>
 	<modules>
-		<module>../timewise-domain</module>
-		<module>../timewise-service</module>
-		<module>../timewise-dto</module>
-		<module>../timewise-controller</module>
+		<module>../timewise-event-domain</module>
+		<module>../timewise-event-dto</module>
+		<module>../timewise-event-upsert-controller</module>
 		<module>../timewise-media-storage</module>
 		<module>../timewise-api-gateway</module>
 		<module>../timewise-security</module>
