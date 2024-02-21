@@ -3,7 +3,6 @@ package com.sundera.timewise.event.util;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sundera.timewise.event.dto.EventDto;

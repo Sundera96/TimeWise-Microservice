@@ -24,6 +24,7 @@ public class EventExporter implements IEventExporter<EventDto> {
 	public EventDto exportReminderEvent(String userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate, LocalTime remindTime) {
 		ReminderEventDto dto = dtoFactory.createReminderEventDto();
+		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);
@@ -39,6 +40,7 @@ public class EventExporter implements IEventExporter<EventDto> {
 	public EventDto exportMeetingEvent(String userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate, LocalTime startTime, LocalTime endTime) {
 		MeetingEventDto dto = dtoFactory.createMeetingEventDto();
+		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);
@@ -55,6 +57,7 @@ public class EventExporter implements IEventExporter<EventDto> {
 	public EventDto exportTaskEvent(String userId, String title, String tag, String textBody,
 			int priority, LocalDate assignedDate, boolean isComplete) {
 		TaskEventDto dto = dtoFactory.createTaskEventDto();
+		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);
@@ -69,6 +72,7 @@ public class EventExporter implements IEventExporter<EventDto> {
 	public EventDto exportJournalEvent(String userId, String title, String tag, String textBody,
 			int priority,LocalDate assignedDate, String imageName) {
 		JournalEventDto dto =dtoFactory.createJournalEventDto();
+		dto.setUserId(userId);
 		dto.setTitle(title);
 		dto.setTag(tag);
 		dto.setTextBody(textBody);

@@ -22,6 +22,7 @@
 		<module>../timewise-media-storage</module>
 		<module>../timewise-api-gateway</module>
 		<module>../timewise-security</module>
+		<module>../timewise-event-find-controller</module>
 	</modules>
 	<properties>
 		<java.version>17</java.version>

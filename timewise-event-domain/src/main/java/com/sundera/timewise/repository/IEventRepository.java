@@ -12,4 +12,5 @@ import com.sundera.timewise.domain.Event;
 @Repository
 public interface IEventRepository extends JpaRepository<Event,UUID> {
 	List<Event> findByUserIdAndAssignedDateBetween(String userId,LocalDate startDate, LocalDate endDate);
+	Event findByUserIdAndId(String userId,UUID id);
 }

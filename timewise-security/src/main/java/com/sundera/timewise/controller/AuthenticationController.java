@@ -13,20 +13,20 @@ import com.sundera.timewise.dto.RegistrationRequest;
 import com.sundera.timewise.service.AuthenticationService;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthenticationController {
 	
 	@Autowired
 	private AuthenticationService authService;
 	
-	@PostMapping("register")
+	@PostMapping("/register")
 	public ResponseEntity<AuthenticationResponse> register(@RequestBody RegistrationRequest request){
 		System.out.println("is it reaching");
 		System.out.println(request.getFirstName());
 		return ResponseEntity.ok(authService.register(request));
 	}
 	
-	@PostMapping("authenticate")
+	@PostMapping("/authenticate")
 	public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
 		return ResponseEntity.ok(authService.authenticate(request));
 	}
