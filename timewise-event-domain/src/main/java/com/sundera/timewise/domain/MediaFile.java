@@ -1,19 +1,21 @@
-package com.sundera.timewise.mediadomain;
+package com.sundera.timewise.domain;
+
+import java.util.UUID;
 
 import jakarta.annotation.Nonnull;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-public class MediaFileDomain {
+@Entity
+public class MediaFile {
 
 	@Id
 	@GeneratedValue
 	private long id;
 	
-	
-	
 	@Nonnull
-	private String name;
+	private UUID name;
 	
 	@Nonnull
 	private String type;
@@ -21,19 +23,24 @@ public class MediaFileDomain {
 	@Nonnull
 	private String filePath;
 	
+	@Nonnull
+	private String userId;
 	
-
-	public MediaFileDomain(String name, String type, String filePath) {
+	
+	public MediaFile(){
+		
+	}
+	public MediaFile(UUID name, String type, String filePath, String userId) {
 		this.name = name;
 		this.type = type;
 		this.filePath = filePath;
 	}
 
-	public String getName() {
+	public UUID getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(UUID name) {
 		this.name = name;
 	}
 
@@ -55,3 +62,4 @@ public class MediaFileDomain {
 	
 	
 }
+
