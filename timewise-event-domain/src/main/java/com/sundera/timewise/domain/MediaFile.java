@@ -1,65 +1,82 @@
 package com.sundera.timewise.domain;
-
-import java.util.UUID;
-
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name="event_media_file")
 public class MediaFile {
 
 	@Id
-	@GeneratedValue
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	
-	@Nonnull
-	private UUID name;
+	@NotNull
+	private String name;
 	
-	@Nonnull
+	@NotNull
 	private String type;
 	
-	@Nonnull
-	private String filePath;
-	
-	@Nonnull
+	@NotNull
 	private String userId;
 	
+	boolean isActive;
 	
 	public MediaFile(){
 		
 	}
-	public MediaFile(UUID name, String type, String filePath, String userId) {
+	
+	public MediaFile(@NotNull String name, @NotNull String type, @NotNull String userId) {
 		this.name = name;
 		this.type = type;
-		this.filePath = filePath;
+		this.userId = userId;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
-	public UUID getName() {
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public String getName() {
 		return name;
 	}
 
-	public void setName(UUID name) {
+
+
+	public void setName(String name) {
 		this.name = name;
 	}
+
+
 
 	public String getType() {
 		return type;
 	}
 
+
+
 	public void setType(String type) {
 		this.type = type;
 	}
 
-	public String getFilePath() {
-		return filePath;
+
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-	
-	
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}	
 }
-

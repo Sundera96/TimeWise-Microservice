@@ -19,10 +19,10 @@
 		<module>../timewise-event-domain</module>
 		<module>../timewise-event-dto</module>
 		<module>../timewise-event-upsert-controller</module>
-		<module>../timewise-media-storage</module>
 		<module>../timewise-api-gateway</module>
 		<module>../timewise-security</module>
 		<module>../timewise-event-find-controller</module>
+		<module>../timewise-mediastorage</module>
 	</modules>
 	<properties>
 		<java.version>17</java.version>
