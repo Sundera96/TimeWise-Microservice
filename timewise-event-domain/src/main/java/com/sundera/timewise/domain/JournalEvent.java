@@ -4,29 +4,32 @@ import java.time.LocalDate;
 
 import com.sundera.timewise.export_events.IEventExporter;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 
 @Entity
 public class JournalEvent extends Event {
-	String imageName;
+	
+	@Column(unique = true)
+	String imageId;
 	
 	public JournalEvent() {
 		
 	}
 	JournalEvent(String userId, String title, String tag, String textBody, int priority, String imageName, LocalDate dateAssignedTo) {
 		super(userId, title, tag, textBody, priority);
-		this.imageName=imageName;
+		this.imageId=imageName;
 	}
 	
 	public String getImageName() {
-		return imageName;
+		return imageId;
 	}
 	public void setImageName(String imageName) {
-		this.imageName = imageName;
+		this.imageId = imageName;
 	}
 	@Override
 	public <T> T export(IEventExporter<T> visitor) {
-		return visitor.exportJournalEvent(userId,title,tag,textBody, priority,assignedDate,imageName);
+		return visitor.exportJournalEvent(userId,title,tag,textBody, priority,assignedDate,imageId);
 	}
 }

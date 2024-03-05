@@ -9,11 +9,11 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.sundera.timewise.domain.MediaFile;
+import com.sundera.timewise.entity.Media;
 import com.sundera.timewise.exceptions.ImageNotFoundException;
 import com.sundera.timewise.exceptions.NotAnImageException;
 import com.sundera.timewise.repository.MediaRepository;
-import com.sundera.timewise.response.MediaFileResponse;
+import com.sundera.timewise.response.MediaResponse;
 
 @Service
 public class MediaService {
@@ -33,22 +33,22 @@ public class MediaService {
 		if(!Files.exists(directory)) {
 			Files.createDirectories(directory);
 		}
-		MediaFile myFile = new MediaFile(fileName,file.getContentType(),userId);
+		Media myFile = new Media(fileName,file.getContentType(),userId);
 		myFile=mediaRepo.save(myFile);
 		if(myFile!=null)
 			Files.write(getCompletePathOfFile(directory,fileName), file.getBytes());
 		return "File Uploaded!";
 	}
 	
-	public MediaFileResponse downloadImage(String userId, String fileName) throws IOException, ImageNotFoundException {
-		MediaFile file = mediaRepo.findByUserIdAndName(userId, fileName);
+	public MediaResponse downloadImage(String userId, String fileName) throws IOException, ImageNotFoundException {
+		Media file = mediaRepo.findByUserIdAndName(userId, fileName);
 		if(file==null) {
 			throw new ImageNotFoundException("Image Not Found");
 		}
 		Path directory = Paths.get(UPLOAD_DIRECTORY,userId);
 		byte[] data = Files.readAllBytes(new File(getCompletePathOfFile(directory,fileName).toString()).toPath());
 		String dataType = file.getType();
-		return new MediaFileResponse(data, dataType);
+		return new MediaResponse(data, dataType);
 	}
 	
 	

@@ -1,6 +1,6 @@
 package com.sundera.timewise.response;
 
-public class MediaFileResponse {
+public class MediaResponse {
 	private byte[] data;
 
 	private String contentType;
@@ -21,7 +21,7 @@ public class MediaFileResponse {
 		this.contentType = contentType;
 	}
 	
-	public MediaFileResponse(byte[] data, String contentType) {
+	public MediaResponse(byte[] data, String contentType) {
 		this.data = data;
 		this.contentType = contentType;
 	}

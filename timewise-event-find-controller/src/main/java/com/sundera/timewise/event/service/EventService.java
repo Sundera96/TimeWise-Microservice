@@ -3,19 +3,12 @@ package com.sundera.timewise.event.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.sundera.timewise.domain.Event;
 import com.sundera.timewise.event.dto.EventDto;
 import com.sundera.timewise.event_view.dto.EventViewDto;
-import com.sundera.timewise.event_view.dto.IEventViewDtoFactory;
 import com.sundera.timewise.exceptions.ResourceNotFoundException;
 import com.sundera.timewise.export_events.IEventExporter;
 import com.sundera.timewise.repository.IEventRepository;

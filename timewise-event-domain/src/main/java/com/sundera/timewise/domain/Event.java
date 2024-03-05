@@ -13,6 +13,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -27,7 +28,7 @@ public abstract class Event {
 	
 	@Id 
 	@GeneratedValue
-	protected UUID id;
+	UUID id;
 
 	@NotNull
 	String userId;
@@ -41,7 +42,7 @@ public abstract class Event {
 	
 	@Min(value = 1)
 	@Max(value = 3)
-	protected int priority;
+	int priority;
 	
 	LocalDate assignedDate;
 	
