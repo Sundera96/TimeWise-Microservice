@@ -37,7 +37,7 @@ public class MediaService {
 		myFile=mediaRepo.save(myFile);
 		if(myFile!=null)
 			Files.write(getCompletePathOfFile(directory,fileName), file.getBytes());
-		return "File Uploaded!";
+		return fileName;
 	}
 	
 	public MediaResponse downloadImage(String userId, String fileName) throws IOException, ImageNotFoundException {
