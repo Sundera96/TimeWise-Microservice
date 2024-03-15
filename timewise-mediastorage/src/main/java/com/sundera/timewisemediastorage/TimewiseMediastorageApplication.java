@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = "com.sundera.timewise")
 @EnableJpaRepositories(basePackages = "com.sundera.timewise.repository")
-@EntityScan(basePackages="com.sundera.timewise.domain")
+@EntityScan(basePackages="com.sundera.timewise.entity")
 public class TimewiseMediastorageApplication {
 
 	public static void main(String[] args) {

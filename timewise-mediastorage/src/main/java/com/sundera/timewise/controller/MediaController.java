@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.sundera.timewise.exceptions.ImageNotFoundException;
 import com.sundera.timewise.exceptions.NotAnImageException;
-import com.sundera.timewise.response.MediaFileResponse;
+import com.sundera.timewise.response.MediaResponse;
 import com.sundera.timewise.service.MediaService;
 
 @RestController
@@ -40,7 +40,7 @@ public class MediaController {
 	@GetMapping("/{filename}")
 	public ResponseEntity<?> downloadImage(@RequestHeader(value="userId") String userId, @PathVariable String filename){
 		try {
-			MediaFileResponse file=mediaService.downloadImage(userId, filename);
+			MediaResponse file=mediaService.downloadImage(userId, filename);
 			return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf(file.getContentType())).body(file.getData());
 		}catch(ImageNotFoundException imageNotFoundException) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Image not Found");

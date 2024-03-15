@@ -1,14 +1,13 @@
-package com.sundera.timewise.domain;
+package com.sundera.timewise.entity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name="event_media_file")
-public class MediaFile {
+public class Media {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +22,11 @@ public class MediaFile {
 	@NotNull
 	private String userId;
 	
-	boolean isActive;
-	
-	public MediaFile(){
+	public Media(){
 		
 	}
 	
-	public MediaFile(@NotNull String name, @NotNull String type, @NotNull String userId) {
+	public Media(@NotNull String name, @NotNull String type, @NotNull String userId) {
 		this.name = name;
 		this.type = type;
 		this.userId = userId;
