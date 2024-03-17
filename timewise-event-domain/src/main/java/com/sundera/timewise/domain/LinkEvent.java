@@ -1,8 +1,8 @@
 package com.sundera.timewise.domain;
 
-import java.time.LocalDateTime;
 import com.sundera.timewise.export_events.IEventExporter;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MeetingEvent extends Event {
-	private LocalDateTime endDateTime;
+public class LinkEvent extends Event {
+	
+	@NotNull
+	private String link;
+
 	@Override
 	public <T> T export(IEventExporter<T> visitor) {
-		return visitor.exportMeetingEvent(getId(), getUserId(), getTitle(), getTopic(), getNotes(), getPriority(), getCreatedDateTime(), getExpiryDateTime(), getEventDateTime(), getEndDateTime());
+		return visitor.exportLinkEvent(getId(),getUserId(), getTitle(), getTopic(), getNotes(), getPriority(), getCreatedDateTime(), getExpiryDateTime(), getEventDateTime(), getLink());
 	}
+
 }

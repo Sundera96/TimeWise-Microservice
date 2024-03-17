@@ -16,7 +16,7 @@ public class EventSeries {
 	@GeneratedValue
 	private UUID id;
 	
-	@OneToMany(mappedBy="series", cascade= CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(mappedBy="series")
 	private List<Event> events;
 
 	public List<Event> getEvents() {

@@ -1,24 +1,20 @@
 package com.sundera.timewise.event_view.dto;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class EventViewMeetingDto extends EventViewDto {
-	@SerializedName("start-time")
-	LocalTime startTime;
-	@SerializedName("end-time")
-	LocalTime endTime;
+	@SerializedName("start-date-time")
+	LocalDateTime startDateTime;
 	
-	public LocalTime getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
-	}
-	public LocalTime getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
-	}
+	@SerializedName("end-date-time")
+	LocalDateTime endDateTime;
 }

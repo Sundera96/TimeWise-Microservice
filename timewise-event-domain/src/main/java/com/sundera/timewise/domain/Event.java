@@ -1,10 +1,11 @@
 package com.sundera.timewise.domain;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.sundera.timewise.export_events.IEventExporter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import com.sundera.timewise.export_events.IEventExporter;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,120 +14,62 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name="event",indexes = {
 		@Index(columnList = "userId")
 })
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQuery(name = "Event.findEvent",
+query="select e from Event e  where e.deletedDateTime is null and e.userId =?1 and e.id = ?2")
+@NamedQuery(name = "Event.findEventsBetweenDates",
+query="select e from Event e where e.deletedDateTime is null and e.userId =?1 and e.eventDateTime between ?2 and ?3")
 public abstract class Event {
 	
 	@Id 
 	@GeneratedValue
-	UUID id;
+	private UUID id;
 
 	@NotNull
-	String userId;
+	private String userId;
 	
 	@NotNull
-	String title;
+	private String title;
 	
-	String tag;
+	@NotNull
+	private String topic;
 	
-	String textBody;
+	private String notes;
 	
 	@Min(value = 1)
 	@Max(value = 3)
-	int priority;
+	private int priority=1;
 	
-	LocalDate assignedDate;
+	@CreationTimestamp
+	private LocalDateTime createdDateTime;
+	
+	private LocalDateTime expiryDateTime;
 	
 	@ManyToOne
 	@JoinColumn(name="series_id")
-	EventSeries series;
-
-
-	Event(){
-		
-	}
+	private EventSeries series;
 	
-	Event(String userId, String title, String tag,String textBody, int priority){
-		this.userId=userId;
-		this.title=title;
-		this.tag=tag;
-		this.textBody=textBody;
-		this.priority=priority;
-	}
+	@NotNull
+	private LocalDateTime eventDateTime;
 	
-	public String getUserId() {
-		return userId;
-	}
+	private LocalDateTime deletedDateTime;
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getTag() {
-		return tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-
-	public String getTextBody() {
-		return textBody;
-	}
-
-	public void setTextBody(String textBody) {
-		this.textBody = textBody;
-	}
-
-	public int getPriority() {
-		return priority;
-	}
-
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
-	
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
-	
 	public abstract <T> T export (IEventExporter<T> visitor);
-	
-	public LocalDate getAssignedDate() {
-		return assignedDate;
-	}
-
-	public void setAssignedDate(LocalDate assignedDate) {
-		this.assignedDate = assignedDate;
-	}
-	
-	public EventSeries getSeries() {
-		return series;
-	}
-
-	public void setSeries(EventSeries series) {
-		this.series = series;
-	}
 }
 

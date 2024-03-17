@@ -1,53 +1,33 @@
 package com.sundera.timewise.event.dto;
 
+import java.time.LocalDateTime;
 
-import java.time.LocalDate;
 import com.sundera.timewise.import_events.IEventImporter;
-import java.time.LocalTime;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class MeetingEventDto extends EventDto {
 	
-	@SerializedName("start-date")
-	LocalDate startDate;
+	@SerializedName("start-date-time")
+	private LocalDateTime startDateTime;
 	
-	@SerializedName("end-date")
-	LocalDate endDate;
+	@SerializedName("end-date-time")
+	private LocalDateTime endDateTime;
 	
-	@SerializedName("start-time")
-	LocalTime startTime;
-	@SerializedName("end-time")
-	LocalTime endTime;
-	
-	public LocalTime getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
-	}
-	public LocalTime getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
-	}
-	
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-	public LocalDate getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
-	}
-	
+	@SerializedName("recurrence-count")
+	int recurrenceCount;
 	@Override
 	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
-		return visitor.importMeeting(userId, title, tag, textBody, priority, startDate,endDate, startTime, endTime);
+		return visitor.importMeetingEvent(getEventId(), getUserId(), getTitle(), getTopic(), getNotes(), getPriority(), getCreatedDateTime(), getExpiryDateTime(), getStartDateTime(), getEndDateTime(), recurrenceCount);
 	}
+	
 }

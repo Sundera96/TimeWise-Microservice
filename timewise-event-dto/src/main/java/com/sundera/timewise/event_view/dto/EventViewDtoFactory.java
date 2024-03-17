@@ -21,8 +21,8 @@ public class EventViewDtoFactory implements IEventViewDtoFactory {
 	}
 
 	@Override
-	public EventViewJournalDto createEventViewJournalDto() {
-		return new EventViewJournalDto();
+	public EventViewLinkDto createEventViewLinkDto() {
+		return new EventViewLinkDto();
 	}
 
 }

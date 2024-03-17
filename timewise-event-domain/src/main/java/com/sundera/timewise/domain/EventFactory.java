@@ -21,8 +21,8 @@ public class EventFactory implements IEventFactory {
 	}
 
 	@Override
-	public JournalEvent createJournalEvent() {
-		return new JournalEvent();
+	public LinkEvent createLinkEvent() {
+		return new LinkEvent();
 	}
 
 }

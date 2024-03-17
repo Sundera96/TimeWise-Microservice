@@ -1,73 +1,43 @@
 package com.sundera.timewise.event.dto;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import com.google.gson.annotations.SerializedName;
 import com.sundera.timewise.import_events.IEventImporter;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public abstract class EventDto {
 	
-	String userId;
-	
-	String title;
-	
-	String tag;
-	
-	@SerializedName("type-tag")
-	String typeEvent;
+	@SerializedName("event-id")
+	private String eventId;
 
-	@SerializedName("text-body")
-	String textBody;
+	private String userId;
 	
-	int priority;
+	private String title;
+	
+	private String topic;
+	
+	@SerializedName("event-type")
+	private String eventType;
+
+	@SerializedName("notes")
+	private String notes;
+	
+	private int priority;
+	
+	@SerializedName("created-date-time")
+	private LocalDateTime createdDateTime;
+
+	@SerializedName("expired-date-time")
+	private LocalDateTime expiryDateTime;
 
 	public abstract <T> List<T> eventImporter(IEventImporter<T> visitor);
-	
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getTag() {
-		return tag;
-	}
-
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-
-	public String getTextBody() {
-		return textBody;
-	}
-
-	public void setTextBody(String textBody) {
-		this.textBody = textBody;
-	}
-
-	public int getPriority() {
-		return priority;
-	}
-
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
-	
-	public String getTypeEvent() {
-		return typeEvent;
-	}
-
-	public void setTypeEvent(String typeEvent) {
-		this.typeEvent = typeEvent;
-	}
 }

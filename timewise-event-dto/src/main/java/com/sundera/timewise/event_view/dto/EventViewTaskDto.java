@@ -1,13 +1,22 @@
 package com.sundera.timewise.event_view.dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import com.google.gson.annotations.SerializedName;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Setter
+@Getter
+@NoArgsConstructor
 public class EventViewTaskDto extends EventViewDto {
-	boolean isComplete;
-
-	public boolean isComplete() {
-		return isComplete;
-	}
-
-	public void setComplete(boolean isComplete) {
-		this.isComplete = isComplete;
-	}
+	@SerializedName("form-habit")
+	private boolean formHabit;
+	
+	@SerializedName("form-habit")
+	private LocalDate taskDate;
 }

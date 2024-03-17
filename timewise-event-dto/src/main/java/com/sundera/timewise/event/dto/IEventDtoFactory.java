@@ -4,5 +4,5 @@ public interface IEventDtoFactory {
 	public ReminderEventDto createReminderEventDto();
 	public MeetingEventDto createMeetingEventDto();
 	public TaskEventDto createTaskEventDto();
-	public JournalEventDto createJournalEventDto();
+	public LinkEventDto createLinkEventDto();
 }

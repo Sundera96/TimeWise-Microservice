@@ -1,42 +1,28 @@
 package com.sundera.timewise.event.dto;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import com.sundera.timewise.import_events.IEventImporter;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import com.google.gson.annotations.SerializedName;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class ReminderEventDto extends EventDto {
 
-	@SerializedName("start-date")
-	LocalDate startDate;
-	
-	@SerializedName("end-date")
-	LocalDate endDate;
-	
-	@SerializedName("remind-time")
-	LocalTime remindTime;
-	
-	public LocalTime getRemindTime() {
-		return remindTime;
-	}
-	public void setRemindTime(LocalTime remindTime) {
-		this.remindTime = remindTime;
-	}
+	@SerializedName("remind-date-time")
+	LocalDateTime remindDateTime;
+
+	@SerializedName("recurrence-count")
+	int recurrenceCount;
+
 	@Override
 	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
-		return visitor.importReminder(userId, title, tag, textBody, priority,startDate,endDate, remindTime);
+		return visitor.importReminderEvent(getEventId(), getUserId(), getTitle(), getTopic(), getNotes(), getPriority(), getCreatedDateTime(), getExpiryDateTime(), getRemindDateTime(), recurrenceCount);
 	}
-	
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-	public LocalDate getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
-	}
+
 }

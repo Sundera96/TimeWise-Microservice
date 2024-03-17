@@ -5,5 +5,5 @@ public interface IEventFactory {
 	ReminderEvent createReminderEvent();
 	MeetingEvent createMeetingEvent();
 	TaskEvent createTaskEvent();
-	JournalEvent createJournalEvent();
+	LinkEvent createLinkEvent();
 }

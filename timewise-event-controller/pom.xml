@@ -8,9 +8,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../timewise-root/pom.xml</relativePath>
 	</parent>
-	<artifactId>timewise-event-find-controller</artifactId>
-	<name>timewise-event-find-controller</name>
-	<description>Service to find all the events</description>
+	<artifactId>timewise-event-controller</artifactId>
+	<name>timewise-event-controller</name>
+	<description>event store and retrieval</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -21,7 +21,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.sundera</groupId>
-			<artifactId>timewise-dto</artifactId>
+			<artifactId>timewise-event-dto</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
@@ -31,10 +31,8 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>com.sundera.timewiseeventfindcontroller.TimewiseEventFindControllerApplication</mainClass>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

@@ -1,14 +1,15 @@
 package com.sundera.timewise.event.exporter;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import com.sundera.timewise.domain.EventSeries;
+import com.sundera.timewise.domain.EventTypes;
 import com.sundera.timewise.event.dto.EventDto;
 import com.sundera.timewise.event.dto.IEventDtoFactory;
-import com.sundera.timewise.event.dto.JournalEventDto;
+import com.sundera.timewise.event.dto.LinkEventDto;
 import com.sundera.timewise.event.dto.MeetingEventDto;
 import com.sundera.timewise.event.dto.ReminderEventDto;
 import com.sundera.timewise.event.dto.TaskEventDto;
@@ -18,69 +19,79 @@ import com.sundera.timewise.export_events.IEventExporter;
 public class EventExporter implements IEventExporter<EventDto> {
 
 	@Autowired
-	private IEventDtoFactory dtoFactory;
-	
+	private IEventDtoFactory eventDtoFactory;
+
 	@Override
-	public EventDto exportReminderEvent(String userId, String title, String tag, String textBody,
-			int priority, LocalDate assignedDate, LocalTime remindTime) {
-		ReminderEventDto dto = dtoFactory.createReminderEventDto();
-		dto.setUserId(userId);
-		dto.setTitle(title);
-		dto.setTag(tag);
-		dto.setTextBody(textBody);
-		dto.setPriority(priority);
-		dto.setStartDate(assignedDate);
-		dto.setEndDate(assignedDate);
-		dto.setRemindTime(remindTime);
-		dto.setTypeEvent("REMINDER");
-		return dto;
+	public EventDto exportReminderEvent(UUID eventId, String userId, String title, String topic, String notes,
+			int priority, LocalDateTime createdDateTime, LocalDateTime expiryDateTime, LocalDateTime eventDateTime) {
+		ReminderEventDto eventDto =  eventDtoFactory.createReminderEventDto();
+		eventDto.setEventId(eventId.toString());
+		eventDto.setUserId(userId);
+		eventDto.setTitle(title);
+		eventDto.setTopic(topic);
+		eventDto.setNotes(notes);
+		eventDto.setPriority(priority);
+		eventDto.setCreatedDateTime(createdDateTime);
+		eventDto.setExpiryDateTime(expiryDateTime);
+		eventDto.setRemindDateTime(eventDateTime);
+		eventDto.setEventType(EventTypes.REMINDER.toString());
+		return eventDto;
 	}
 
 	@Override
-	public EventDto exportMeetingEvent(String userId, String title, String tag, String textBody,
-			int priority, LocalDate assignedDate, LocalTime startTime, LocalTime endTime) {
-		MeetingEventDto dto = dtoFactory.createMeetingEventDto();
-		dto.setUserId(userId);
-		dto.setTitle(title);
-		dto.setTag(tag);
-		dto.setTextBody(textBody);
-		dto.setPriority(priority);
-		dto.setStartDate(assignedDate);
-		dto.setEndDate(assignedDate);
-		dto.setStartTime(startTime);
-		dto.setEndTime(endTime);
-		dto.setTypeEvent("MEETING");
-		return dto;
+	public EventDto exportMeetingEvent(UUID eventId, String userId, String title, String topic, String notes,
+			int priority, LocalDateTime createdDateTime, LocalDateTime expiryDateTime, LocalDateTime eventDateTime,
+			LocalDateTime endDateTime) {
+		MeetingEventDto eventDto =  eventDtoFactory.createMeetingEventDto();
+		eventDto.setEventId(eventId.toString());
+		eventDto.setUserId(userId);
+		eventDto.setTitle(title);
+		eventDto.setTopic(topic);
+		eventDto.setNotes(notes);
+		eventDto.setPriority(priority);
+		eventDto.setCreatedDateTime(createdDateTime);
+		eventDto.setExpiryDateTime(expiryDateTime);
+		eventDto.setStartDateTime(eventDateTime);
+		eventDto.setEndDateTime(endDateTime);
+		eventDto.setEventType(EventTypes.MEETING.toString());
+		return eventDto;
 	}
 
 	@Override
-	public EventDto exportTaskEvent(String userId, String title, String tag, String textBody,
-			int priority, LocalDate assignedDate, boolean isComplete) {
-		TaskEventDto dto = dtoFactory.createTaskEventDto();
-		dto.setUserId(userId);
-		dto.setTitle(title);
-		dto.setTag(tag);
-		dto.setTextBody(textBody);
-		dto.setPriority(priority);
-		dto.setDate(assignedDate);
-		dto.setComplete(isComplete);
-		dto.setTypeEvent("TASK");
-		return dto;
+	public EventDto exportTaskEvent(UUID eventId, String userId, String title, String topic, String notes, int priority,
+			LocalDateTime createdDateTime, LocalDateTime expiryDateTime, LocalDateTime eventDateTime,
+			boolean formHabit) {
+		TaskEventDto eventDto = eventDtoFactory.createTaskEventDto();
+		eventDto.setEventId(eventId.toString());
+		eventDto.setUserId(userId);
+		eventDto.setTitle(title);
+		eventDto.setTopic(topic);
+		eventDto.setNotes(notes);
+		eventDto.setPriority(priority);
+		eventDto.setCreatedDateTime(createdDateTime);
+		eventDto.setExpiryDateTime(expiryDateTime);
+		eventDto.setTaskDate(eventDateTime.toLocalDate());
+		eventDto.setFormHabit(formHabit);
+		eventDto.setEventType(EventTypes.TASK.toString());
+		return eventDto;
 	}
 
 	@Override
-	public EventDto exportJournalEvent(String userId, String title, String tag, String textBody,
-			int priority,LocalDate assignedDate, String imageName) {
-		JournalEventDto dto =dtoFactory.createJournalEventDto();
-		dto.setUserId(userId);
-		dto.setTitle(title);
-		dto.setTag(tag);
-		dto.setTextBody(textBody);
-		dto.setPriority(priority);
-		dto.setImageName(imageName);
-		dto.setAssignedDate(assignedDate);
-		dto.setTypeEvent("JOURNAL");
-		return dto;
+	public EventDto exportLinkEvent(UUID eventId, String userId, String title, String topic, String notes, int priority,
+			LocalDateTime createdDateTime, LocalDateTime expiryDateTime, LocalDateTime eventDateTime, String link) {
+		LinkEventDto eventDto = eventDtoFactory.createLinkEventDto();
+		eventDto.setEventId(eventId.toString());
+		eventDto.setUserId(userId);
+		eventDto.setTitle(title);
+		eventDto.setTopic(topic);
+		eventDto.setNotes(notes);
+		eventDto.setPriority(priority);
+		eventDto.setCreatedDateTime(createdDateTime);
+		eventDto.setExpiryDateTime(expiryDateTime);
+		eventDto.setLink(link);
+		eventDto.setEventType(EventTypes.LINK.toString());
+		return eventDto;
 	}
+
 
 }

@@ -4,29 +4,26 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 import com.sundera.timewise.import_events.IEventImporter;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class TaskEventDto extends EventDto {
 	
-	@SerializedName("is-complete")
-	boolean isComplete;
-	
 	@SerializedName("task-date")
-	LocalDate date;
+	LocalDate taskDate;
 	
-	public LocalDate getDate() {
-		return date;
-	}
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-	public boolean isComplete() {
-		return isComplete;
-	}
-	public void setComplete(boolean isComplete) {
-		this.isComplete = isComplete;
-	}
+	@SerializedName("form-habit")
+	boolean isFormHabit;
+
 	@Override
 	public <T> List<T> eventImporter(IEventImporter<T> visitor) {
 		// TODO Auto-generated method stub
-		return visitor.importTask(userId, title, tag, textBody, priority, date, isComplete);
+		return visitor.importTaskEvent(getEventId(), getUserId(), getTitle(), getTopic(), getNotes(), getPriority(), getCreatedDateTime(), getExpiryDateTime(), getTaskDate(), isFormHabit);
 	}
+
 }
