@@ -17,6 +17,6 @@ public class EventViewTaskDto extends EventViewDto {
 	@SerializedName("form-habit")
 	private boolean formHabit;
 	
-	@SerializedName("form-habit")
+	@SerializedName("task-date")
 	private LocalDate taskDate;
 }

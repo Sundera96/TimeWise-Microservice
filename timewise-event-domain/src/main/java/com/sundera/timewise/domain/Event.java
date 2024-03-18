@@ -34,7 +34,7 @@ import lombok.Setter;
 @NamedQuery(name = "Event.findEvent",
 query="select e from Event e  where e.deletedDateTime is null and e.userId =?1 and e.id = ?2")
 @NamedQuery(name = "Event.findEventsBetweenDates",
-query="select e from Event e where e.deletedDateTime is null and e.userId =?1 and e.eventDateTime between ?2 and ?3")
+query="select e from Event e where e.deletedDateTime is null and e.userId =?1 and e.eventDateTime between ?2 and ?3 order by e.eventDateTime")
 public abstract class Event {
 	
 	@Id 

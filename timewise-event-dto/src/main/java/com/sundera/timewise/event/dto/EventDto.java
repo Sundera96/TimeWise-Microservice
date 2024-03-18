@@ -3,7 +3,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.google.gson.annotations.SerializedName;
+import com.sundera.timewise.event_view.dto.EventViewDto;
 import com.sundera.timewise.import_events.IEventImporter;
 
 import lombok.Builder;
@@ -14,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public abstract class EventDto {
+public abstract class EventDto extends RepresentationModel<EventDto> {
 	
 	@SerializedName("event-id")
 	private String eventId;

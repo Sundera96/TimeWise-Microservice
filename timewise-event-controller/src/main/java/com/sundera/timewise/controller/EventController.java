@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import com.sundera.timewise.event_view.dto.EventViewDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +41,10 @@ public class EventController {
 	public ResponseEntity<EventDto> getEvent(@RequestHeader(value="userId") String userId,@PathVariable String eventId) throws Exception {
 		try {
 			EventDto event = eventService.getEvent(userId,UUID.fromString(eventId));
+			StringBuilder str = new StringBuilder("http://localhost:8080/event/");
+			event.add(Link.of(str.toString(),"update"));
+			str.append(event.getEventId());
+			event.add(Link.of(str.toString(),"delete"));
 			return ResponseEntity.status(HttpStatus.OK).body(event);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -60,6 +66,13 @@ public class EventController {
 		Gson gson = GsonFactory.createGson();
 		try {
 			List<EventViewDto> dtos =  eventService.getEvents(userId,gson.fromJson(startDate,LocalDate.class), gson.fromJson(endDate,LocalDate.class));
+			StringBuilder str = new StringBuilder("http://localhost:8080/event/");
+			for(EventViewDto dto:dtos) {
+				str.append(dto.getEventId());
+				dto.add(Link.of(str.toString(), IanaLinkRelations.SELF));
+				str.delete(0, str.length());
+				System.out.println(dto.getLinks());
+			}
 			return dtos;
 		}catch(Exception e) {
 			throw new Exception("Invalid arguments passed in getEvents()");

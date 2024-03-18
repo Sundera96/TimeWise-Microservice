@@ -25,6 +25,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 	public GatewayFilter apply(Config config) {
 		return ((exchange,chain)->{
 			if(routeValidator.isSecured.test(exchange.getRequest())) {
+				System.out.println(exchange.getRequest().getHeaders());
+				System.out.println(exchange.getRequest().getHeaders().get("Authorization"));
+				System.out.println(exchange.getRequest().getHeaders().get("Authorization").get(0));
 				final String authHeader=exchange.getRequest().getHeaders().get("Authorization").get(0);
 				final String token;
 				if(authHeader!=null&&authHeader.startsWith("Bearer")) {
